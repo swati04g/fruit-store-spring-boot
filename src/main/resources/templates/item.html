@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>fruit shop - eat healthy stay fit</title>
+  <link rel="stylesheet" type="text/css" href="../../css/main.css" media="all" />
+</head>
+<body>
+<div id="header">
+  <a class="topPageAnchor" href="index.html"><img
+          src="../../img/fruitshop-logo.png" /></a>
+</div>
+  <div id="sidebar">
+    <h3>Your Page</h3>
+    <ul>
+      <li><a id="viewCartAnchorLink" href="cart/view">view cart</a></li>
+    </ul>
+    <h3>Category</h3>
+    <ul id="categoryList" th:each="iterStat : ${CategoriesList}">
+      <li><a th:href="@{'/itemList/' + ${iterStat.id}}"><span th:text="${iterStat.name}"></span></a></li>
+    </ul>
+  </div>
+  <div id="content">
+    <div id="itemBox">
+      <img src="../../img/dummy-img-200x200.png" style="float: left; margin: 4px;" />
+      <h1 id="itemName" th:text="${item.name}">item name</h1>
+      <div id="itemDescription" th:text="${item.description}"></div>
+      <form id="addCartForm" method="post" action="/cart/add">
+	 <input type="hidden" name="itemId" th:value="${item.id}" />
+        <table>
+          <thead>
+            <tr>
+              <th>price</th>
+              <th>amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>$<span id="itemPrice" th:text="${item.price}"></span></td>
+              <td><select name="amount">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+              </select></td>
+            </tr>
+          </tbody>
+        </table>
+        <input id="addToCart" type="image" src="../../img/addCart.png"
+          style="margin: 10px; width: 120px; height: 35px;" />
+		  
+      </form>
+    </div>
+  </div>
+</body>
+</html>
